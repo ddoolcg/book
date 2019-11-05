@@ -4,23 +4,35 @@ import requests  # 导入requests 模块
 from bs4 import BeautifulSoup, NavigableString  # 导入BeautifulSoup 模块
 import sys
 
-host = 'http://www.biquge.cm'
-path = '/9/9661/7604186.html'
-name = u'带着仓库到大明'
-char_set = 'gbk'
+host = 'http://www.biqu6.com'
+path = '/30_30058/19949289.html'
+name = u'九星毒奶'
+trims = (u"新笔趣阁", u"笔趣阁", u"-", u"_", u"正文卷", u"玄幻小说", u"科幻小说", u"修真小说", u"重回仙界", u"初来乍到",)
+char_set = 'UTF-8'
 
 
 def start(_file, _host, _path):
-    r = requests.get(_host + _path, headers=headers)  
+    r = requests.get(_host + _path, headers=headers)
     r.encoding = char_set
     html = BeautifulSoup(r.text, 'lxml')
-    title = html.find('title').string.replace(name, '').strip()
+    title = html.find('title').string.replace(name, '')
+    for trim in trims:
+        title = title.replace(trim, '')
+    title = title.strip()
+    # 有效章
+    title_find = title.find(u" ")
+    if title_find > 0:
+        if title.find(u"第") != 0:  # 开通+第
+            title = u"第%s" % (title,)
+        i = title.find(u"章")
+        if i < 0 or i > title_find:  # 中间插入章
+            title = title.replace(u" ", u"章 ", 1)
     _file.write('\n\n\n' + title + '\n\n\n')
     content_tag = html.find(id='content')
     if content_tag and content_tag.contents and len(str(content_tag.contents)) > 500:
         for content in content_tag.contents:
             if type(content) == NavigableString:
-                f.write(content.replace('&nbsp;', '').strip())
+                f.write(content.replace('&nbsp;', '').replace('“', '"').replace('”', '"').replace('，', ',').strip())
             elif str(content) == '<br/>':
                 f.write('\n')
         f.write('\n')
