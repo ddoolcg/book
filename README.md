@@ -10,8 +10,8 @@ pip install beautifulsoup4
 
 #下面的代码需要手动修改为你的才能用
 ~~~python
-host = 'http://www.biquge.cm'
+host = 'http://www.xxx.com'
 path = '/9/9661/7604186.html'
-name = u'带着仓库到大明'
+name = u'小说名称'
 char_set = 'gbk'
 ~~~
