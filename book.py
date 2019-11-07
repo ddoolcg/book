@@ -4,10 +4,10 @@ import requests  # 导入requests 模块
 from bs4 import BeautifulSoup, NavigableString  # 导入BeautifulSoup 模块
 import sys
 
-host = 'http://www.biqu6.com'
+host = 'http://www.xxx.com'
 path = '/30_30058/19949289.html'
-name = u'九星毒奶'
-trims = (u"新笔趣阁", u"笔趣阁", u"-", u"_", u"正文卷", u"玄幻小说", u"科幻小说", u"修真小说", u"重回仙界", u"初来乍到",)
+name = u'小说名称'
+trims = (u"新笔趣阁", u"笔趣阁", u"-", u"_", u"正文卷", u"玄幻小说", u"科幻小说", u"修真小说", u"重回仙界", u"初来乍到",) # title排除保存字段
 char_set = 'UTF-8'
 
 
